@@ -56,7 +56,7 @@ Open a browser and log into your github account. Navigate to the repository that
 
 Fork the repository. The Fork button can be found in the top right of the page when viewing the repository. 
 
-![fork](images/fork.png)
+![fork](images/fork2.png)
 
 
 This will give you yor own copy to work with in your own GitHub account and make setting up the lab environment easier. Navigate to the reposity in YOUR account.
