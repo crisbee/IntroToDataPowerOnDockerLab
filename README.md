@@ -156,28 +156,21 @@ acb220039030: Pull complete
 login: 
 ````
 
->What did that command do?
+What did that command do?
 
->You just provisioned a DataPower with a single command! Wasn't that cool? Way easier and faster than other methods? I thnk so!
->You asked Docker to run a DataPower container and it did! Let's break down the command line by line:
->docker run -it    -This tells docker to run the container with a bash shell (terminal) attached to it
+You just provisioned a DataPower with a single command! Wasn't that cool? Way easier and faster than other methods? I thnk so!
+You asked Docker to run a DataPower container and it did! Let's break down the command line by line:
 
->-v $PWD/config:/drouter/config     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.
+docker run -it    -This tells docker to run the container with a bash shell (terminal) attached to it  
+-v $PWD/config:/drouter/config     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.  
+-v $PWD/local:/drouter/local     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.  
+-e DATAPOWER_ACCEPT_LICENSE=true     -This sets an environent varialbe for the container to a specific value. In this case, it accepts the license agreement.  
+-e DATAPOWER_INTERACTIVE=true      -This sets an environent varialbe for the container to a specific value. In this case, it allows acess to the container via the command line after it is started.  
+-e DATAPOWER_WORKER_THREADS=4     -This sets an environent varialbe for the container to a specific value. In this case, it sets the number of worker threads to 4.  
+-p 9090:9090      -This maps port 9090 of the container to port 9090 of your host OS.  
+ibmcom/datapower:2018.4.1     -This specifies that we want to run the container named "datapower" from the "/ibmcom" repository. Specifically the "2018.4.1" version.
 
->-v $PWD/local:/drouter/local     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.
-
->-e DATAPOWER_ACCEPT_LICENSE=true     -This sets an environent varialbe for the container to a specific value. In this case, it accepts the license agreement.
-
->-e DATAPOWER_INTERACTIVE=true      -This sets an environent varialbe for the container to a specific value. In this case, it allows acess to the container via the command line after it is started.
-
->-e DATAPOWER_WORKER_THREADS=4     -This sets an environent varialbe for the container to a specific value. In this case, it sets the number of worker threads to 4.
-
->-p 9090:9090      -This maps port 9090 of the container to port 9090 of your host OS.
-
->ibmcom/datapower:2018.4.1     -This specifies that we want to run the container named "datapower" from the "/ibmcom" repository. Specifically the "2018.4.1" version.
->
->Another thing to note is that docker downloaded the container image. If looks to see if you have the image locally first, then downlaods it if it is not present. Once it has the image, it creates a container based on the image. That image can be used over and over again to create conainers. Think of it like  a teamplate.
-
+>Note: Another thing to note is that docker downloaded the container image. If looks to see if you have the image locally first, then downlaods it if it is not present. Once it has the image, it creates a container based on the image. That image can be used over and over again to create conainers. Think of it like a teamplate.
 
 ### Using your new DataPower container
 DataPower is running and now you want to configure it to do something! This lab is not meant to teach DataPower configurations, so we will keep it simple. We will log in, make some basic configurations, and then export the configuration.
