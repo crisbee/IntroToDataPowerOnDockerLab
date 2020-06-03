@@ -38,8 +38,6 @@ Insert
 
 
 # Start with Git
-Git is used to 
-
 
 Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. For example, this lab is hoted on Git Hub, which is a website that hosts Git.
 
@@ -48,7 +46,7 @@ Open up a new terminal window and verify that Git is installed with the followin
 git --version
 ````
 You will hopefully see something like the following to show what version is installed:
-````css
+````console
 git version 1.8.3.1
 ````
 
@@ -63,7 +61,7 @@ This will give you yor own copy to work with in your own GitHub account and make
 
 
 Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and downlaod, or "clone", the repository. 
-The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone.png)
+The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone2.png)
 
 ````console
 cd ~
@@ -71,10 +69,6 @@ git clone https://github.com/[YOUR ACCOUNT NAME HERE]/IntroToDataPowerOnDockerLa
 ````
 
 Now the repository is set up on your local computer! We will use it a lot later.
-
-
-
-
 
 # Docker Setup
 Docker is the container runtime you will use for the DataPower container in this lab.
@@ -85,7 +79,7 @@ In you terminal, verify that Docker is installed with the following command:
 docker -v
 ````
 You will hopefully see something like the following to show what version is installed.
-````css
+````console
 Docker version 19.03.8, build afacb8b
 ````
 
@@ -96,7 +90,7 @@ In you terminal, run the following command:
 docker run hello-world
 ````
 You will see something like the following to show that it worked.
-````css
+````console
 [ibmuser@localhost mydp]$ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -125,11 +119,12 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ````
+
 Great! Docker is working!
 
 
 # Starting a DataPower container
-STAR
+
 You now want to run your first DataPower container. Docker makes this super easy. You can do it with a single command.
 
 First, make a directory to work in. Do this inside of your local repository. Open up it's permissions so that our DataPower can write to it later, then enter it.
@@ -162,22 +157,30 @@ login:
 ````
 
 >What did that command do?
+
 >You just provisioned a DataPower with a single command! Wasn't that cool? Way easier and faster than other methods? I thnk so!
 >You asked Docker to run a DataPower container and it did! Let's break down the command line by line:
 >docker run -it    -This tells docker to run the container with a bash shell (terminal) attached to it
+
 >-v $PWD/config:/drouter/config     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.
+
 >-v $PWD/local:/drouter/local     -This binds a volume inside the container to a volume on your local OS. More on this later in the lab.
+
 >-e DATAPOWER_ACCEPT_LICENSE=true     -This sets an environent varialbe for the container to a specific value. In this case, it accepts the license agreement.
+
 >-e DATAPOWER_INTERACTIVE=true      -This sets an environent varialbe for the container to a specific value. In this case, it allows acess to the container via the command line after it is started.
+
 >-e DATAPOWER_WORKER_THREADS=4     -This sets an environent varialbe for the container to a specific value. In this case, it sets the number of worker threads to 4.
+
 >-p 9090:9090      -This maps port 9090 of the container to port 9090 of your host OS.
+
 >ibmcom/datapower:2018.4.1     -This specifies that we want to run the container named "datapower" from the "/ibmcom" repository. Specifically the "2018.4.1" version.
 >
 >Another thing to note is that docker downloaded the container image. If looks to see if you have the image locally first, then downlaods it if it is not present. Once it has the image, it creates a container based on the image. That image can be used over and over again to create conainers. Think of it like  a teamplate.
 
 
 ### Using your new DataPower container
-DataPower is running and now you want to configure it to do something! This lab is not meant to teach DataPower configurations, so we will keep it simple. We will log in, make some configurations, and then export the configuration.
+DataPower is running and now you want to configure it to do something! This lab is not meant to teach DataPower configurations, so we will keep it simple. We will log in, make some basic configurations, and then export the configuration.
 
 In you terminal, log into the runnign DataPower. The login promp should be present already since you started the container. The super secret default user is "admin" and the super secret default passord is.... "admin".
 ````console
@@ -196,7 +199,6 @@ Serial number: 0000001
 idg# 
 ````
 
-
 The first thing you probalby want to do if you are doing DP dev work is enable the Web GUI.
 In you terminal, run the following command:
 ````console
@@ -207,11 +209,12 @@ The output should be similar to the following:
 Global mode
 Web management: successfully started
 ````
->Remember in the docker run command when we mapped the container's port 9090 to the host's port 9090? Well we just started the web GUI on the container's port 9090, so now we should be able to access it from our host's port 9090.
+>Note: Remember in the docker run command when we mapped the container's port 9090 to the host's port 9090? Well, we just started the web GUI on the container's port 9090, so now we should be able to access it from our host's port 9090.
 
 Open up a web browser and browser to https://localhost:9090.
-You should see the DataPower login screen.
-# Insert DP login screen image.
+You should see the DataPower login screen. You may have to accept an insecure certificate to get there usign the browsers settings. Firefox makes it easy.
+
+![dplogin](images/DP_Login_Screen.png)
 
 
 
@@ -220,12 +223,9 @@ Now that we have access to the GUI, we can make some configurations. Then we wil
 
 If you arent already there, open up a web browser and browser to https://localhost:9090. Then, login with the un/p of admin/admin again. Leave the other settings alone. 
 
-#insert empty GUI image
+![emptydpgui](images/empty_DP_GUI.png)
 
-Now that you are logged in, you can see that there is nothign configured in this DP. That is because it was made from the the bare DP image. Not it's time to make some configurations so that we
-
-
-Let's make a few simple configurations.
+Now that you are logged in, you can see that there is nothign configured in this DP. That is because it was made from the the bare DP image. Let's make a few simple configurations.
 
 ####Create a new domain
 In the left most menu, click on the Admin gear, then click the Configuration drop down arrow, then select Application Domain. Your screen will look like the below image.
@@ -684,5 +684,6 @@ Now anybody can grab your image with the docker pull command!
 
 
 # delete all local stuff and pull the image. cool. Explain why its so good. su up lab. prooread, then test.
+
 
 
