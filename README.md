@@ -64,7 +64,7 @@ This will give you yor own copy to work with in your own GitHub account and make
 
 Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and downlaod, or "clone", the repository. 
 
-> Note: The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone.png)
+> Note: The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone2.png)
 
 ````console
 cd ~
