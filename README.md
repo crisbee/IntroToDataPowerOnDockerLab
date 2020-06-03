@@ -56,11 +56,7 @@ Open a browser and log into your github account. Navigate to the repository that
 
 Fork the repository. The Fork button can be found in the top right of the page when viewing the repository. 
 
-#insert FORK pick
 ![fork](images/fork.png)
-
-https://github.com/horvatca/IntroToDataPowerOnDockerLab/blob/master/images/fork.png
-
 
 
 This will give you yor own copy to work with in your own GitHub account and make setting up the lab environment easier. Navigate to the reposity in YOUR account.
@@ -68,8 +64,7 @@ This will give you yor own copy to work with in your own GitHub account and make
 
 Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and downlaod, or "clone", the repository. 
 
-> Note: The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser.
-#insert CLONE button
+> Note: The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone.png)
 
 ````console
 cd ~
