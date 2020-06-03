@@ -1,16 +1,16 @@
 
 ```json
-   // code for coloring
+   code for coloring
 ```
 ```html
-   // code for coloring
+   code for coloring
 ```
 ```js
-   // code for coloring
+   code for coloring
 ```
 ```css
-   // code for coloring
-   ````
+   code for coloring
+````
 
 
 
