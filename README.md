@@ -1,19 +1,4 @@
 
-```json
-   code for coloring
-```
-```html
-   code for coloring
-```
-```js
-   code for coloring
-```
-```css
-   code for coloring
-````
-
-
-
 # An Introduction to DataPower with Docker
 
 This lab will introduce you to the basics of working with DataPower using Docker containers. You will learn how to launch and configure DataPower containers, create your own custom DataPower container image, and put all the important assets in change control. You will also publish your final DataPower container image to a repository, where it can be used by other team members or devops pipelines.
@@ -63,7 +48,7 @@ Open up a new terminal window and verify that Git is installed with the followin
 git --version
 ````
 You will hopefully see something like the following to show what version is installed:
-````java
+````css
 git version 1.8.3.1
 ````
 
@@ -78,22 +63,21 @@ This will give you yor own copy to work with in your own GitHub account and make
 
 
 Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and downlaod, or "clone", the repository. 
-
-> Note: The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone2.png)
+The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone.png)
 
 ````console
 cd ~
 git clone https://github.com/[YOUR ACCOUNT NAME HERE]/IntroToDataPowerOnDockerLab.git
 ````
 
-Now the repository is set up on your local computer!
+Now the repository is set up on your local computer! We will use it a lot later.
 
 
 
 
 
 # Docker Setup
-STAR
+Docker is the container runtime you will use for the DataPower container in this lab.
 
 ### Verify Docker installation.
 In you terminal, verify that Docker is installed with the following command:
@@ -101,7 +85,7 @@ In you terminal, verify that Docker is installed with the following command:
 docker -v
 ````
 You will hopefully see something like the following to show what version is installed.
-````console
+````css
 Docker version 19.03.8, build afacb8b
 ````
 
@@ -112,7 +96,7 @@ In you terminal, run the following command:
 docker run hello-world
 ````
 You will see something like the following to show that it worked.
-````console
+````css
 [ibmuser@localhost mydp]$ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
