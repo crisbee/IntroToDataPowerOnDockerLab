@@ -48,7 +48,7 @@ Open up a new terminal window and verify that Git is installed with the followin
 git --version
 ````
 You will hopefully see something like the following to show what version is installed:
-````console
+````java
 git version 1.8.3.1
 ````
 
