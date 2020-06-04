@@ -8,7 +8,7 @@ This lab is perfect for you if:
 * You are just starting out with DataPower.
 * You are a current DataPower customers who want to move to using a containerized DataPower deployment.
 * You are a manager who wants to better understand the tools your team is using.
-* You want to know the basics about how software is deplopyed with containers.
+* You want to know the basics about how software is deployed with containers.
 * You want to know how the most popular open source tools for containers and version control work together.
 
 ### Author contact
@@ -21,8 +21,8 @@ You should have a basic knowledge of how to access and work in the Linux command
 ### The computer you will be doing this lab on needs...
 The easiest way to make sure you have the right setup is to contact chase.horvath@ibm.com and request an online environment.
 
-#### If not using a supplied environemnt
-If you want to set up your own environemnt, you will need a system with the following characteristics:
+#### If not using a supplied environment
+If you want to set up your own environment, you will need a system with the following characteristics:
 * A virtual machine with a Linux based operating system with a GUI. (CentOS is highly recommended and is what this lab was written for.)
 * A user with sudo/root access
 * An Internet connection. A virtual machine will work fine and is encouraged. 
@@ -34,11 +34,11 @@ If you want to set up your own environemnt, you will need a system with the foll
 * A Docker Hub account. (https://hub.docker.com/)
 
 # Access your VM
-If you are using a VM provided by the author, Chase, or IBM, follow thier instructions.
-If you are using your own VM, thenlog in, bring up your desktop, and open a terminal window.
+If you are using a VM provided by the author, Chase, or IBM, follow their instructions.
+If you are using your own VM, then log in, bring up your desktop, and open a terminal window.
 
 # Gitting started with Git
-Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. For example, this lab is hoted on Git Hub, which is a website that hosts Git.
+Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. For example, this lab is hosted on Git Hub, which is a website that hosts Git.
 
 Open up a new terminal window and verify that Git is installed with the following command:
 ````console
@@ -50,15 +50,15 @@ You console output will look something like the following to show what version i
 git version 1.8.3.1
 ````
 
-Open a browser and log into your github account. Navigate to the repository that this lab is in: https://github.com/horvatca/IntroToDataPowerOnDockerLab.
+Open a browser and log into your GitHub account. Navigate to the repository that this lab is in: https://github.com/horvatca/IntroToDataPowerOnDockerLab.
 
 Fork the repository. The Fork button can be found in the top right of the page when viewing the repository. 
 
 ![fork](images/fork2.png)
 
-This will give you yor own copy to work with in your own GitHub account and make setting up the lab environment easier. Navigate to the reposity in YOUR account.
+This will give you your own copy to work with in your own GitHub account and make setting up the lab environment easier. Navigate to the repository in YOUR account.
 
-Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and downlaod, or "clone", the repository. 
+Next, download YOUR repository to YOUR local home directory. You will use the git clone command and the link to your repository. The below commands move you to your home directory and download, or "clone", the repository. 
 The link can be found in the green "Clone or download" button when viewing YOUR repository in YOUR account in the browser. ![clone](images/clone2.png)
 
 ````console
@@ -155,7 +155,7 @@ login:
 ````
 
 What did that command do?  
-You just provisioned a DataPower with a single command! Wasn't that cool? Way easier and faster than other methods? I thnk so!
+You just provisioned a DataPower with a single command! Wasn't that cool? Way easier and faster than other methods? I think so!
 You asked Docker to run a DataPower container and it did! Let's break down the command line by line:
 
 docker run -it    -This tells docker to run the container with a bash shell (terminal) attached to it  
@@ -167,13 +167,13 @@ docker run -it    -This tells docker to run the container with a bash shell (ter
 -p 9090:9090      -This maps port 9090 of the container to port 9090 of your host OS.  
 ibmcom/datapower:2018.4.1     -This specifies that we want to run the container named "datapower" from the "/ibmcom" repository. Specifically the "2018.4.1" version.
 
->Note: Another thing to note is that docker downloaded the container image. If looks to see if you have the image locally first, then downlaods it if it is not present. Once it has the image, it creates a container based on the image. That image can be used over and over again to create conainers. Think of it like a teamplate.
+>Note: Another thing to note is that docker downloaded the container image. If looks to see if you have the image locally first, then downloads it if it is not present. Once it has the image, it creates a container based on the image. That image can be used over and over again to create containers. Think of it like a template.
 
 
 ### Using your new DataPower container  
 DataPower is running and now you want to configure it to do something! This lab is not meant to teach DataPower configurations, so we will keep it simple. We will log in, make some basic configurations, and then export the configuration.
 
-In you terminal, log into the runnign DataPower. The login promp should be present already since you started the container. The super secret default user is "admin" and the super secret default passord is.... "admin".
+In you terminal, log into the running DataPower. The login prompt should be present already since you started the container. The super secret default user is "admin" and the super secret default password is.... "admin".
 ````console
 login: admin
 Password: *****
@@ -190,7 +190,7 @@ Serial number: 0000001
 idg# 
 ````
 
-The first thing you probalby want to do if you are doing DP dev work is enable the Web GUI.
+The first thing you probably want to do if you are doing DP dev work is enable the Web GUI.
 In you terminal, run the following command:
 ````console
 configure; web-mgmt 0 9090 9090;
@@ -203,7 +203,7 @@ Web management: successfully started
 >Note: Remember in the docker run command when we mapped the container's port 9090 to the host's port 9090? Well, we just started the web GUI on the container's port 9090, so now we should be able to access it from our host's port 9090.
 
 Open up a web browser and browser to https://localhost:9090.
-You should see the DataPower login screen. You may have to accept an insecure certificate to get there usign the browsers settings. Firefox makes it easy.
+You should see the DataPower login screen. You may have to accept an insecure certificate to get there using the browsers settings. Firefox makes it easy.
 
 ![dplogin](images/DP_Login_Screen.png)
 
@@ -212,11 +212,11 @@ You should see the DataPower login screen. You may have to accept an insecure ce
 # Make and save some configurations  
 Now that we have access to the GUI, we can make some configurations. Then we will export them so that we can build them into a container image and rapidly launch LOTS of DataPower containers with those configurations.
 
-If you arent already there, open up a web browser and browser to https://localhost:9090. Then, login with the un/p of admin/admin again. Leave the other settings alone. 
+If you aren't already there, open up a web browser and browser to https://localhost:9090. Then, login with the un/p of admin/admin again. Leave the other settings alone. 
 
 ![emptydpgui](images/empty_DP_GUI.png)
 
-Now that you are logged in, you can see that there is nothign configured in this DP. That is because it was made from the the bare DP image. Let's make a few simple configurations.
+Now that you are logged in, you can see that there is nothing configured in this DP. That is because it was made from the bare DP image. Let's make a few simple configurations.
 
 ### Create a new domain  
 In the left most menu, click on the Admin gear, then click the Configuration drop down arrow, then select Application Domain. Your screen will look like the below image.
@@ -227,22 +227,21 @@ Click the New... button and give your domain a name and a comment like in the be
 
 ![newdomain2](images/make_domain_2.png)
 
-You will be taken to the Applicain Domains list and yours will appear like in the below image.
+You will be taken to the Application Domains list and yours will appear like in the below image.
 
 ![newdomain2](images/make_domain_3.png)
 
 
 ### Create a new Web Service Proxy  
-In the left most menu, click on the Services cloud, then click the Multi-Protocol Gateway option.d Your screen will look like the below image.
+Click the New Service drop down in the upper right and select Web Service Proxy.
 
-![newproxy](images/make_web_service_proxy.png)
+![newwebserviceproxy](images/new_web_service_proxy.png)
 
-Click the New button.
+In the Web Service Proxy Name field, enter "MyNewWebServiceProxy" and click the Create Web Service Proxy button.  
 
-.....
-#finish these instrucions.
+![webserviceproxynameentry](images/new_web_service_proxy_entry.png)
 
-
+That is all you need to do. You can click the All Service link to return to the previous screen where you will see your MyNewWebServiceProxy listed.
 
 ### Save the configurations  
 Across the top of the DP interface in the browser has been a message bar saying "The running configuration of the device contains unsaved changes." Click the Save Changes link in that message bar.
@@ -252,10 +251,13 @@ Across the top of the DP interface in the browser has been a message bar saying 
 ### Explore the configuration files  
 The changes you just made to the running DataPower (made a Web Service Proxy and a new Application Domain) were persisted in configuration files. Remember the  "-v $PWD/config:/drouter/config" and "-v $PWD/local:/drouter/local" parts of the command that we used to start the container? Those mapped where the configuration files were saved to our local host file system. Let's explore them with the following commands.
 
+> Note: If you don't have tree installed and don't want to install it on your machine, don't worry. Not using the tree command will not affect the rest of this lab. It is only a nice visual. You could also explore the files with the ls command.
+
 ````console
 tree ~/IntroToDataPowerOnDockerLab/mydp
 ````
 What you see are two directories inside the mydp directory where you started the container from. config and local were created by the container to persist the settings. Your output should look like the below:
+
 ````console
 [ibmuser@localhost secondDP]$ tree ~/IntroToDataPowerOnDockerLab/mydp
 /home/ibmuser/IntroToDataPowerOnDockerLab/mydp
@@ -267,11 +269,7 @@ What you see are two directories inside the mydp directory where you started the
 2 directories, 2 files
 ````
 
-> Note: If you don't have tree installed and don't want to install it on your machine, don't worry. Not using the tree command will not affect the rest of this lab. It is only a nice visual. You could also explore the files with the ls command.
-
-
-
-Now lets move into the config directory and take a look at the .cfg files in it. We will search the auto-startup.cfg file for the test "My" so that we will be shown the exact lines that reference the "MyNewWebServiceProxy" and "MyNewAppDomain" we created.
+Now move into the config directory and take a look at the .cfg files in it. You will search the auto-startup.cfg file for the text "My" so that we will be shown the exact lines that reference the "MyNewWebServiceProxy" and "MyNewAppDomain" we created.
 
 ````console
 cd  ~/IntroToDataPowerOnDockerLab/mydp/config
@@ -307,13 +305,11 @@ domain "MyNewAppDomain"
 
 For the changes we made, this auto-startup.cfg file is the only place they will show up. More complicated configurations will have more files in both the config and local directories.
 
-
-# Put your configuratioins in source control using Git
+# Put your configurations in source control using Git
 
 We want to be able to use these configurations over and over, see what changes from version to version, and share them with team members. The best place do that is in a Git repository. We will "push" these files to our git repo now.
 
->Note: Most GitHub repositories, like the ones we are using, are pulic. Anybody can see it. In a real scenario, you would have your own private repository that allowed you to control access. 
-
+>Note: Most GitHub repositories, like the ones we are using, are public. Anybody can see it. In a real scenario, you would have your own private repository that allowed you to control access. 
 
 NOTE and UPDATE: 
   May have to stop the container. During testing, try with it running. I wrote the below with it stopped.
@@ -324,8 +320,7 @@ a868e8dd216b        ibmcom/datapower:2018.4.1   "/start.sh"         9 days ago  
 a868e8dd216b  
 END NOTE
 
-Use the below commands to push your ocnfiguraiton file to your ghithub repository.
-
+Use the below commands to push your configuration file to your GitHub repository.
 
 ````console
 cd ~/IntroToDataPowerOnDockerLab
@@ -334,25 +329,22 @@ git commit -m 'Adding the dp configurations.'
 git push
 ````
 
-Now browse to your repository in the browser. You should see that in addition to the README.md, your configs are also there! It should look like the below screen shot. You may need to refreshthe page if you were already there:
+Now browse to your repository in the browser. You should see that in addition to the README.md, your configs are also there! It should look like the below screen shot. You may need to refresh the page if you were already there:
 
 ![pubconfigs](images/github_with_pushed_configs.png)
 
-> Note: If you explore the files that got pushed to github, you will notice that the /IntroToDataPowerOnDockerLab/mydp/local directory was no pushed. This is beause the directory is empty and by default, Git will ignore it. This is OK. It will not interfere with our lab.
+> Note: If you explore the files that got pushed to GitHub, you will notice that the /IntroToDataPowerOnDockerLab/mydp/local directory was no pushed. This is because the directory is empty and by default, Git will ignore it. This is OK. It will not interfere with our lab.
 
 WONDERFUL! You now have the configurations you made to DataPower stored in version control! In the next parts of the lab, we will use them to create and deploy more DataPowers containers with the same configurations.
 
-
-
 # Launch another DataPower with the configurations
-This will show you a basic way to launch another DataPower with the same configurations as the one you just built. It is important to understand how this works so that we can packeage the configurations into a container image so that we can distribute the immutable container for use by our teams.
+This will show you a basic way to launch another DataPower with the same configurations as the one you just built. It is important to understand how this works so that we can package the configurations into a container image so that we can distribute the immutable container for use by our teams.
 
 ### Stage the configuration files
 
-OPEN AN NEW TERMINAL WINDOW and use the commands below to create a new directory and clone your configuraiton files from the Git reposiroty you just pushed them to. In the git clone command below, replace the [YOUR ACCOUNT NAME HERE] with your GitHub account name. You can also get the entire link from the handy green button on your repository home page like at the very beginning of the lab.
+OPEN AN NEW TERMINAL WINDOW and use the commands below to create a new directory and clone your configuration files from the Git repository you just pushed them to. In the git clone command below, replace the [YOUR ACCOUNT NAME HERE] with your GitHub account name. You can also get the entire link from the handy green button on your repository home page like at the very beginning of the lab.
 
->Note: We could have just coppied them, but cloning them gets you more familiar with Git. Also, anybody who has access to this repo could get the files in the same way.
-
+>Note: We could have just copied them, but cloning them gets you more familiar with Git. Also, anybody who has access to this repo could get the files in the same way.
 
 ````console
 mkdir ~/secondDP
@@ -372,7 +364,7 @@ Unpacking objects: 100% (15/15), done.
 ````
 
 Optional:
-If you have tree installed, you can check what was downlaoded easily. See an example below.
+If you have tree installed, you can check what was downloaded easily. See an example below.
 ```console
 [ibmuser@localhost ~]$ tree ~/secondDP/
 /home/ibmuser/secondDP/
@@ -403,13 +395,11 @@ docker run -it \
   ibmcom/datapower:2018.4.1
 ````
 
-
 Once is starts, in a browser, browse to https://localhost:9091. Login with un/p = admin/admin as before. Magically, you see your MyNewWebServiceProxy and the MyNewAppDomain in this brand new container! You can browse to the other one at https://localhost:9090 and see them side by side like in the below screen shot.
 
 ![dualcontainers](images/dual_containers.png)
 
 >Note: Check out that odd string of numbers at the top of each browser window and in the DP GUI where it says IDG console at XXXXXXXXX. This is the ID of the container and we will see it in the next steps.
-
 
 ### Check to see what docker is running.
 
@@ -438,7 +428,6 @@ docker stop [insert your docker container ID]
 docker container rm [insert your docker container ID]
 ````
 
-
 The commands and output will look like the following:
 ````console
 [ibmuser@localhost mydp]$ docker stop 585b4ccc4117
@@ -451,7 +440,7 @@ a868e8dd216b
 a868e8dd216b
 ````
 
-You can now run the docker ps command adain and the output will be blank. However docker ps only returns running containers. We want to see ALL the containers, runnign or stopped. Use the -a option to see them all and verify that you have suceessfuly removed all the containers.
+You can now run the docker ps command again and the output will be blank. However docker ps only returns running containers. We want to see ALL the containers, running or stopped. Use the -a option to see them all and verify that you have sucessfully removed all the containers.
 
 ````console
 docker ps -a
@@ -466,7 +455,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 #### WE AREN'T DONE CLEANING YET!
 
-Remember that we have both docker IMAGES and CONTAINERS. Use the docker images -a command to see all the images you have locally. You output will look somethign like the below.
+Remember that we have both docker IMAGES and CONTAINERS. Use the docker images -a command to see all the images you have locally. You output will look something like the below.
 
 ````console
 [ibmuser@localhost mydp]$ docker images -a
@@ -477,22 +466,23 @@ hello-world         latest              bf756fb1ae65        4 months ago        
 
 > Why do you only see two images but you ran 3 containers? Remember that a container is made according to an image. The two DataPower containers you ran used the same image!
 
-Remove the hello-world imafge with the docker rmi -f command. In the example below, insert YOUR hello-world IMAGE ID in the brackets.
+Remove the hello-world image with the docker rmi -f command. In the example below, insert YOUR hello-world IMAGE ID in the brackets.
 
 ````console
 docker rmi -f [insert your docker container ID]
 ````
 
-Your output will look similar to the following:
+Your output will look similar to the following:  
 ````console
 [ibmuser@localhost mydp]$ docker rmi -f bf756fb1ae65
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:6a65f928fb91fcfbc963f7aa6d57c8eeb426ad9a20c7ee045538ef34847f44f1
 Deleted: sha256:bf756fb1ae65adf866bd8c456593cd24beb6a0a061dedf42b26a993176745f6b
 ````
+
 >Note: If you accidentally delete your DataPower image, that is OK. It will be automatically downloaded next time you want to use it... like coming up very soon in the next sections.
 
-Now try browsing to your two datpowers. POOF! GONE! They don't exist anymore.
+Now try browsing to your two DataPowers. POOF! GONE! They don't exist anymore.
 
 # Create an immutable container image out of your configurations
 
@@ -501,7 +491,7 @@ Next, we are going to build our own DataPower Docker image that includes the con
 ### Create the Dockerfile
 A docker image is defined via a Dockerfile.
 
-Make sure you are in the /home/ibmuser/secondDP/IntroToDataPowerOnDockerLab/mydp dirctory. This is where we are going to create the Dockerfile. Use the following command (copy and past all at once) to create the file:
+Make sure you are in the /home/ibmuser/secondDP/IntroToDataPowerOnDockerLab/mydp directory. This is where we are going to create the Dockerfile. Use the following command (copy and past all at once) to create the file:
 
 ````console
 cd ~/secondDP/IntroToDataPowerOnDockerLab/mydp/
@@ -519,20 +509,17 @@ ADD ./local /drouter/local
 EOL
 ````
 
-That just made a file called Dockerfile with the content shown above. Let'e break it down line by line:  
+That just made a file called Dockerfile with the content shown above. Let's break it down line by line:  
 FROM ibmcom/datapower:2018.4.1   - start with the DataPower container versioned 2018.4.1
   
 ENV  DATAPOWER_ACCEPT_LICENSE=true \  - set these environment variables inside the container  
      DATAPOWER_INTERACTIVE=true \  
      DATAPOWER_WORKER_THREADS=2 \  
   
-EXPOSE 9090     - make port 9090 accessbile
+EXPOSE 9090     - make port 9090 accessible
   
 ADD ./config /drouter/config     - copy the contents from the config and local directories where this
-ADD ./local /drouter/local        -  image is being made INTO the corespoding locations INTISE the container image.
-
-
-
+ADD ./local /drouter/local        -  image is being made INTO the corresponding locations INTISE the container image.
 
 
 ### Build it
@@ -578,7 +565,7 @@ ibmcom/datapower    2018.4.1            4975fdceebe6        2 months ago        
 
 
 ### Run it
-Now we can run our new image. Because you built the config files and environment settings into the image, you don't have to specify them you run it anymore! Everythign is packaged, making deployments fast, controlled, simple, repeatable, and reliable.
+Now we can run our new image. Because you built the config files and environment settings into the image, you don't have to specify them you run it anymore! Everything is packaged, making deployments fast, controlled, simple, repeatable, and reliable.
 
 ````console
 docker run -it -p 9090:9090 mydp:1.0
@@ -616,19 +603,19 @@ git push
 
 
 # Push your image to Docker Hub.
-Docker Hub is a free and public registry for container images. That means that it is a place where you can store, version, and distribute your container images. Anythign you put in a public Docker Hub registry can be accessed by anybody, which is fine for the purposes of this lab.
+Docker Hub is a free and public registry for container images. That means that it is a place where you can store, version, and distribute your container images. Anything you put in a public Docker Hub registry can be accessed by anybody, which is fine for the purposes of this lab.
 
-> Note: Organizations often have a private registry where they keep thier container images. This provides security and control over who can access them. Many IBM and Red Hat products come with a container repository for your enteirpse to host and use privately.
+> Note: Organizations often have a private registry where they keep their container images. This provides security and control over who can access them. Many IBM and Red Hat products come with a container repository for your enterprise to host and use privately.
 
-Registries are used for contianer images much like GitHub is used for software code. It enables teams to collaborate more easily and serves as a distribution point for the content. It isn't just for human users. Systems like DevOps pipelines, Open Shift, and Kubernetes pull the containers they need from repositoires when starting deplloyments. You pulled images from Docker Hub when you first started the Hello-World and DataPower containers for this lab.
+Registries are used for container images much like GitHub is used for software code. It enables teams to collaborate more easily and serves as a distribution point for the content. It isn't just for human users. Systems like DevOps pipelines, Open Shift, and Kubernetes pull the containers they need from repositories  when starting deployments. You pulled images from Docker Hub when you first started the Hello-World and DataPower containers for this lab.
 
 ### Create a Docker Hub repository
 Browse to https://hub.docker.com/ and login. Create a free account if you have not.
-Create a repositoty by clicking the blue "Create Repository" button in the upper right.
+Create a repository by clicking the blue "Create Repository" button in the upper right.
 
 Give it a name of "mydp". Then click the blue "Create" button at the bottom. Other settings can be left at their defaults.
 
-You will be taken to the repositor page. The reposiroty will be named [you user name]/mydp. 
+You will be taken to the repository page. The repository will be named [you user name]/mydp. 
 
 OPEN A NEW TERMINAL and login in to Docker with the docker login command.
 
@@ -658,7 +645,7 @@ Use the docker images command to list your local images again.
 docker images
 ````
 
-You will see a list of your images, including the mydp image we ust made. Your output will look similar to mine shown below:
+You will see a list of your images, including the mydp image we just made. Your output will look similar to mine shown below:
 ````console
 [ibmuser@localhost ~]$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -690,9 +677,9 @@ mydp                1.0                 7818f17dfd9d        4 days ago          
 ibmcom/datapower    2018.4.1            4975fdceebe6        3 months ago        873MB
 ````
 
-See your new image? Aweseom! It's just your old image with a new tag.
+See your new image? Awesome! It's just your old image with a new tag.
 
-> Note: It looks like you have several images taking up 2619 MB (3x873) but you don't! This is beacuse containers use a really cool file system that is able to share "layers". It is WAY outside the scope of this lab, but if you are interested, look up the "union" file system for containers.
+> Note: It looks like you have several images taking up 2619 MB (3x873) but you don't! This is because containers use a really cool file system that is able to share "layers". It is WAY outside the scope of this lab, but if you are interested, look up the "union" file system for containers.
 
 ### Push it real good!
 
@@ -713,11 +700,11 @@ b68d6f44cdd4: Mounted from ibmcom/datapower
 1.0: digest: sha256:b76e2fff65791ca56c23c859616d3f84961527625faad25481a39bee32f10c0d size: 1155
 ````
 
->Note: It may take a minute for this to complete depending on your uplaod speed. It's almost a GB, which is on the large side for a Docker conatiner.
+>Note: It may take a minute for this to complete depending on your upload speed. It's almost a GB, which is on the large side for a Docker container.
 
 >Note: You named your image with your user name and repository name when you tagged it. This is how the docker push command knows where to send it! The ":1.0" is an additional tag that you use for the version number. This is common practice. Sometimes you will see "latest" as a tag as well to indicate the most recent version of something.
 
-Go back to your Docker Hub repository in your browser. Refresh it to get the updates. You will see that the repositoy now has a tag and some meta data. The "Tags" tab has some extra data but it's pretty minimal. We could add more, but generally this is not the place for documentation.
+Go back to your Docker Hub repository in your browser. Refresh it to get the updates. You will see that the repository now has a tag and some meta data. The "Tags" tab has some extra data but it's pretty minimal. We could add more, but generally this is not the place for documentation.
 
 Your repo should look similar to the below image:
 ![repowithimage](images/repo_with_image.png)
@@ -726,19 +713,19 @@ Now anybody can grab your image with the docker pull command!
 
 
 # The value you created
-To understand the total value these tools provide when used together, it is necessary to look at it from the perpectives of the different teams that come into play in any organization.
+To understand the total value these tools provide when used together, it is necessary to look at it from the perspectives  of the different teams that come into play in any organization.
 
 #### Operations:
-Gone is the day of following long and confusing run books to deploy the behemoth that the dev team built. Deployments, upgrades, and rollbacks are now done with a single command on any platoform that can run a Docker conainer. Scaling up and down is easy fast and effecient. Automating infrastructure as code is much simpler.
+Gone is the day of following long and confusing run books to deploy the behemoth that the dev team built. Deployments, upgrades, and rollbacks are now done with a single command on any platform that can run a Docker container. Scaling up and down is easy fast and efficient. Automating infrastructure as code is much simpler.
 
 #### Security:
-Containers are secured differently from virtual machines, but they are inherently more secure when the correct tools are used. With correct practices, no users are logging into prodction containers. They can be destroyed and replaced almost instantly with assured reliability and repeatability. The definiton of a container can be scanned before it is run and cryptographic tools can be used to make sure that container that is being run was built in the image the devlopers created and the security team sanctioned.
+Containers are secured differently from virtual machines, but they are inherently more secure when the correct tools are used. With correct practices, no users are logging into production containers. They can be destroyed and replaced almost instantly with assured reliability and repeatability. The definition of a container can be scanned before it is run and cryptographic tools can be used to make sure that container that is being run was built in the image the developers created and the security team sanctioned.
 
-#### Develpment:
-Assets are centrally located and under change control using effective tools that enabele teamwork. Changes and features can be rapidly devloped and controlled. Dev and test environments are easy to stand up and have parridy with production.
+#### Development:
+Assets are centrally located and under change control using effective tools that enable teamwork. Changes and features can be rapidly developed and controlled. Dev and test environments are easy to stand up and have parity with production.
 
 #### Management:
-Busines value produced per dollar spent increases. All assets and knowledge products are stored centrally under change control so there is minimal loss if a workstation fails, a server crashes, or an emplopyee leaves. Disaster recovery times are greatly shortened. Business continuity is preserved. Resource utilization and scaling are more effecient.
+Business value produced per dollar spent increases. All assets and knowledge products are stored centrally under change control so there is minimal loss if a workstation fails, a server crashes, or an employee leaves. Disaster recovery times are greatly shortened. Business continuity is preserved. Resource utilization and scaling are more efficient.
 
 
 # Final challenges!
@@ -747,10 +734,10 @@ See if you can work out the following tasks with what you learned in the lab. Th
 Demonstrate how easy it is to deploy YOUR DataPower container! If you are doing this lab in a classroom environment or with a partner, ask the other lab participants to deploy your container a few times. Can you get your partner's container running?
 > Hint: Use the docker run command.
 
-Pick apart a container image. One way to do that is to look at the Dockerfile, but another way is to inspect the image itself. There is a lot of data in the output that you may not be able to decipher, but if you inspect YOUR DataPower image, you should be abel to see where you tagged it "mydp:1.0".
-> Hint: Use theh "docker image inspect [IMAGE ID]" command.
+Pick apart a container image. One way to do that is to look at the Dockerfile, but another way is to inspect the image itself. There is a lot of data in the output that you may not be able to decipher, but if you inspect YOUR DataPower image, you should be able to see where you tagged it "mydp:1.0".
+> Hint: Use the "docker image inspect [IMAGE ID]" command.
 
-Demonstrate the effeciency of containers of VMs. Deploy a few containers and watch system resource utilization rise and fall.
+Demonstrate the efficiency of containers over VMs. Deploy and stop a few containers and watch system resource utilization rise and fall. There is no real load on the containers as DataPower is not processing and traffic, so it will be minimal, but give it a try.
 > Hint: The "top" command will show you resource utilization.
 
 Help me make the lab better! I'm sure you found a typo or some problem with this lab. Let me know about it and at the same time get to know another feature of GitHub. Go to this lab's home repository at https://github.com/horvatca/IntroToDataPowerOnDockerLab and open in Issue.
