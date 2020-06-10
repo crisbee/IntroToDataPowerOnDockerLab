@@ -314,22 +314,62 @@ We want to be able to use these configurations over and over, see what changes f
 
 >Note: Most GitHub repositories, like the ones we are using, are public. Anybody can see it. In a real scenario, you would have your own private repository that allowed you to control access. 
 
-# TODO: 
-  May have to stop the container. During testing, try with it running. I wrote the below with it stopped.
-[ibmuser@localhost IntroToDataPowerOnDockerLab]$ docker ps
-CONTAINER ID        IMAGE                       COMMAND             CREATED             STATUS              PORTS                    NAMES
-a868e8dd216b        ibmcom/datapower:2018.4.1   "/start.sh"         9 days ago          Up 9 days           0.0.0.0:9090->9090/tcp   mystifying_wright
-[ibmuser@localhost IntroToDataPowerOnDockerLab]$ docker stop a868e8dd216b
-a868e8dd216b  
-END TODO
-
 Use the below commands to push your configuration file to your GitHub repository.
 
 ````console
+sudo chmod 777 -R ~/IntroToDataPowerOnDockerLab/mydp
 cd ~/IntroToDataPowerOnDockerLab
 git add .
 git commit -m 'Adding the dp configurations.'
 git push
+````
+
+Your output should look close to the below:
+````console
+[ibmuser@localhost mydp]$ sudo chmod 777 -R ~/IntroToDataPowerOnDockerLab/mydp
+[ibmuser@localhost IntroToDataPowerOnDockerLab]$ git add .
+[ibmuser@localhost IntroToDataPowerOnDockerLab]$ git commit -m 'Adding the dp configurations.'
+[master f43b523] Adding the dp configurations.
+ Committer: ibmuser <ibmuser@localhost.localdomain>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 1187 insertions(+)
+ create mode 100755 mydp/config/auto-startup.cfg
+ create mode 100755 mydp/config/auto-user.cfg
+[ibmuser@localhost IntroToDataPowerOnDockerLab]$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': chase-horvath-ibm
+Password for 'https://chase-horvath-ibm@github.com': 
+Counting objects: 7, done.
+Delta compression using up to 6 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 6.60 KiB | 0 bytes/s, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To https://github.com/chase-horvath-ibm/IntroToDataPowerOnDockerLab.git
+   2e44428..f43b523  master -> master
+[ibmuser@localhost IntroToDataPowerOnDockerLab]$ 
 ````
 
 Next, browse to your repository in the browser. You should see that in addition to the README.md, your configs are also there! It should look like the below screen shot. You may need to refresh the page if you were already there:
@@ -369,17 +409,18 @@ Unpacking objects: 100% (15/15), done.
 Optional:
 If you have tree installed, you can check what was downloaded easily. See an example below.
 ```console
-[ibmuser@localhost ~]$ tree ~/secondDP/
+[ibmuser@localhost secondDP]$ tree ~/secondDP/
 /home/ibmuser/secondDP/
 └── IntroToDataPowerOnDockerLab
+    ├── images
+    │   ├── .... a bunch of image files listed here...
     ├── mydp
     │   └── config
     │       ├── auto-startup.cfg
     │       └── auto-user.cfg
     └── README.md
 
-3 directories, 3 files
-
+4 directories, 21 files
 ````
 
 ### Launch and inspect the new DataPower container
@@ -449,16 +490,24 @@ You can now run the docker ps command again and the output will be blank. Howeve
 docker ps -a
 ````
 
-Your output will look like the following headers with no data!:
-# UPDATE THIS TO SHOW THE HELLO WORLD CONTAINER AS WELL. 3 in total maybe??????
+Your output will look like the following:  
 ````console
-[ibmuser@localhost mydp]$ docker ps -a
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[ibmuser@localhost ~]$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+3ee41723481a        hello-world         "/hello"            27 minutes ago      Exited (0) 27 minutes ago                       adoring_herschel
 ````
+>Why is there a stopped container there? Because you ran the hello-world container at the beginning of the lab! It automaticaly stops itself. It did not show up in the first docker ps command because it was stopped. You need the -a option to show stopped containers.
+
+Now try browsing to your two DataPowers. POOF! GONE! They don't exist anymore.  
+You can close the old terminal windows where the DataPowers were running.
 
 #### WE AREN'T DONE CLEANING YET!
 
 Remember that we have both docker IMAGES and CONTAINERS. Use the docker images -a command to see all the images you have locally. You output will look something like the below.
+
+````console
+docker images
+````
 
 ````console
 [ibmuser@localhost mydp]$ docker images -a
@@ -484,10 +533,6 @@ Deleted: sha256:bf756fb1ae65adf866bd8c456593cd24beb6a0a061dedf42b26a993176745f6b
 ````
 
 >Note: If you accidentally delete your DataPower image, that is OK. It will be automatically downloaded next time you want to use it... like coming up very soon in the next sections.
-
-Now try browsing to your two DataPowers. POOF! GONE! They don't exist anymore.
-
-You can close the old terminal windows where the DataPowers were running.
 
 # Create a container image with your configurations
 
@@ -596,7 +641,7 @@ Congratulations! You have just successfully created and launched your own custom
 # Push your Dockerfile to your Git repository
 You created a new asset - the Dockerfile - that you want to keep in Git for all the reasons we keep things in Git.  
 Use the below sequence of commands to add that Dockerfile to your repo. This is just like when you added the config files to git.
-
+**Open a new teminal window**  
 ````console
 cd ~/secondDP/IntroToDataPowerOnDockerLab/mydp/
 git add .
@@ -604,7 +649,9 @@ git commit -m 'Adding Dockerfile.'
 git push
 ````
 
->Note: If you are interested, you can look at the commits to your repo on the GitHub web page. The link to see them is in the upper left of the repos home page.
+Now browse to your Git repo again and find the Dockerfile you just pushed to it. It's in the /mydp directory. You are building a library of your assets!
+
+>Side Quest! Optional - If you are interested, you can look at the commits to your repo on the GitHub web page. The link to see them is in the upper left of the repos home page. They will show you who changed what when - line for line, character for character.
 
 
 # Push your image to Docker Hub.
@@ -714,7 +761,7 @@ Go back to your Docker Hub repository in your browser. Refresh it to get the upd
 Your repo should look similar to the below image:
 ![repowithimage](images/repo_with_image.png)
 
-Now anybody can grab your image with the docker pull command!
+Now anybody anywhere can grab your image with the docker pull command! You can also look back on your work later and use is as a reference. You saved a copy of this lab to your Git when you forked the repository. All the assets you created are there.
 
 
 # The value you created
@@ -753,8 +800,9 @@ Help me make the lab better! I'm sure you found a typo or some problem with this
 # Thank You
 Contact me at chase.horvath@ibm.com with comments and questions.
 
-
-
+<br />  
+<br />  
+<br />  
 
 
 # Appendix A: Set up your own VM
@@ -791,6 +839,4 @@ Install tree
 ````console
 yum install tree
 ````
-
-
 
