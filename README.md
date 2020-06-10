@@ -817,7 +817,7 @@ You will need a system with the following characteristics:
 * Git installed. (https://git-scm.com/downloads)
 * tree installed.
 
-###Quick commands to install Docker, Git, and tree
+### Quick commands to install Docker, Git, and tree
 Docker:
 ````console
 yum install -y yum-utils device-mapper-persistent-data lvm2
