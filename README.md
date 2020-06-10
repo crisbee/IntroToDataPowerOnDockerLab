@@ -125,7 +125,6 @@ You now want to run your first DataPower container. Docker makes this super easy
 First, make a directory to work in. Do this inside of your local repository. Open up it's permissions so that our DataPower can write to it later, then enter it.
 ````console
 mkdir ~/IntroToDataPowerOnDockerLab/mydp
-sudo chmod 777 -R ~/IntroToDataPowerOnDockerLab/mydp
 cd ~/IntroToDataPowerOnDockerLab/mydp
 ````
 
@@ -243,16 +242,19 @@ In the Web Service Proxy Name field, enter "MyNewWebServiceProxy" and click the 
 That is all you need to do. You can click the All Services link to return to the previous screen where you will see your MyNewWebServiceProxy listed.
 
 ### Save the configurations  
-Across the top of the DP interface in the browser has been a message bar saying "The running configuration of the device contains unsaved changes." Click the Save Changes link in that message bar.
+
+**OPEN A NEW TERMINAL WINDOW** Leave the other one open.  
+Open up the permissions on the location where DP will save the configurations.
+````console
+sudo chmod 777 -R ~/IntroToDataPowerOnDockerLab/mydp
+````
+
+Return to the browser with the DP GUI. Across the top of the DP interface in the browser has been a message bar saying "The running configuration of the device contains unsaved changes." Click the Save Changes link in that message bar.
 
 ![messagebar](images/message_bar.png)
 
 ### Explore the configuration files  
 The changes you just made to the running DataPower (made a Web Service Proxy and a new Application Domain) were persisted in configuration files. Remember the  "-v $PWD/config:/drouter/config" and "-v $PWD/local:/drouter/local" parts of the command that we used to start the container? Those mapped where the configuration files were saved to our local host file system. Let's explore them with the following commands.
-
-OPEN A NEW TERMINAL WINDOW
-
-> Note: If you don't have tree installed and don't want to install it on your machine, don't worry. Not using the tree command will not affect the rest of this lab. It is only a nice visual. You could also explore the files with the ls command. Either way, still open a new terminal window.
 
 ````console
 tree ~/IntroToDataPowerOnDockerLab/mydp
@@ -789,5 +791,6 @@ Install tree
 ````console
 yum install tree
 ````
+
 
 
