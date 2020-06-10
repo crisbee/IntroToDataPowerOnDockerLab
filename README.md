@@ -14,31 +14,26 @@ This lab is perfect for you if:
 ### Author contact
 Contact me at chase.horvath@ibm.com with comments and questions.
 
-# Pre-requisites
+# Prerequisites
 ### Knowledge
 You should have a basic knowledge of how to access and work in the Linux command line terminal. All the commands you will need are provided. You really just need to know that it exists and know how to open it.
 
-### The computer you will be doing this lab on needs...
-The easiest way to make sure you have the right setup is to contact chase.horvath@ibm.com and request an online environment.
-
-#### If not using a supplied environment
-If you want to set up your own environment, you will need a system with the following characteristics:
-* A virtual machine with a Linux based operating system with a GUI. (CentOS is highly recommended and is what this lab was written for.)
-* A user with sudo/root access.
-* An Internet connection. A virtual machine will work fine and is encouraged. 
-* Docker installed. (https://docs.docker.com/engine/install/)
-* Git installed. (https://git-scm.com/downloads)
+### The lab environment
+It is best to use an environment hosted by IBM as it will be set up specifically with the prerequisites for the lab. You can request one from the author, chase.horvath@ibm.com. It will be accessible via a web browser.  
+If you wish to build your own environment, Appendix A: Set up your own VM, is at the end of this lab and has instructions to help you.
 
 ### Accounts you will need (all free)
 * A GitHub account. (https://github.com/)
 * A Docker Hub account. (https://hub.docker.com/)
 
 # Access your VM
-If you are using a VM provided by the author, Chase, or IBM, follow their instructions.
+If you are using a VM provided by the author or IBM, you will receive and email with access instructions. The user name for the supplied VM is "ibmuser" and the super secret password is "ibmuser".  
 If you are using your own VM, then log in, bring up your desktop, and open a terminal window.
 
 # Gitting started with Git
 Git is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files. For example, this lab is hosted on Git Hub, which is a website that hosts Git.
+
+If you have not logged into the VM yet, log in. User = ibmuser Password = ibmuser
 
 Open up a new terminal window and verify that Git is installed with the following command:
 ````console
@@ -755,5 +750,44 @@ Help me make the lab better! I'm sure you found a typo or some problem with this
 
 # Thank You
 Contact me at chase.horvath@ibm.com with comments and questions.
+
+
+
+
+
+# Appendix A: Set up your own VM
+
+If not using a supplied environment and want to set up your own VM to do the lab on, this section will guide you.
+
+You will need a system with the following characteristics:
+* A virtual machine with a Linux based operating system with a GUI. (CentOS is highly recommended and is what this lab was written for.)
+* A user with sudo/root access.
+* An Internet connection. A virtual machine will work fine and is encouraged. 
+* Docker installed. (https://docs.docker.com/engine/install/)
+* Git installed. (https://git-scm.com/downloads)
+* tree installed.
+
+###Quick commands to install Docker, Git, and tree
+Docker:
+````console
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io
+systemctl enable docker
+systemctl start docker
+````
+If not using root, make it so you don't have to type sudo for each docker command whith your user:
+````console
+sudo groupadd docker
+sudo usermod -aG docker $USER
+````
+Install Git
+````console
+yum install git
+````
+Install tree
+````console
+yum install tree
+````
 
 
