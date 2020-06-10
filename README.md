@@ -654,7 +654,7 @@ Now browse to your Git repo again and find the Dockerfile you just pushed to it.
 >Side Quest! Optional - If you are interested, you can look at the commits to your repo on the GitHub web page. The link to see them is in the upper left of the repos home page. They will show you who changed what when - line for line, character for character.
 
 
-# Push your image to Docker Hub.
+# Push your image to Docker Hub
 Docker Hub is a free and public registry for container images. That means that it is a place where you can store, version, and distribute your container images. Anything you put in a public Docker Hub registry can be accessed by anybody, which is fine for the purposes of this lab.
 
 > Note: Organizations often have a private registry where they keep their container images. This provides security and control over who can access them. Many IBM and Red Hat products come with a container repository for your enterprise to host and use privately.
@@ -839,4 +839,6 @@ Install tree
 ````console
 yum install tree
 ````
+
+
 
