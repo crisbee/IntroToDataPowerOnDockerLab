@@ -318,6 +318,19 @@ We want to be able to use these configurations over and over, see what changes f
 
 >Note: Most GitHub repositories, like the ones we are using, are public. Anybody can see it. In a real scenario, you would have your own private repository that allowed you to control access. 
 
+Configure your GitHub account at the command line using the below commands.
+
+````console
+git config --global user.email [your email address for your Git Hub account]
+git config --global user.name [your Git Hub user name]
+````
+
+Your output will look similar to:
+````console
+[ibmuser@localhost mydp]$ git config --global user.email chase.horvath@ibm.com]
+[ibmuser@localhost mydp]$ git config --global user.name chase-horvath-ibm
+````
+
 Use the below commands to push your configuration file to your GitHub repository.
 
 ````console
