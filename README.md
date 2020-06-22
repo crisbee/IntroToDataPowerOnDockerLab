@@ -126,7 +126,7 @@ Great! Docker is working!
 # Starting a DataPower container
 You now want to run your first DataPower container. Docker makes this super easy. You can do it with a single command.
 
-First, make a directory to work in. Do this inside of your local repository. Open up it's permissions so that our DataPower can write to it later, then enter it.
+First, make a directory to work in. Do this inside of your local repository.  
 ````console
 mkdir ~/IntroToDataPowerOnDockerLab/mydp
 cd ~/IntroToDataPowerOnDockerLab/mydp
