@@ -14,12 +14,16 @@ This lab is perfect for you if:
 ### Author contact
 Contact me at chase.horvath@ibm.com with comments and questions.
 
+### This lab book
+The most up to date version of this lab book can be found in the README.md file on this lab’s GitHub repository at https://github.com/horvatca/IntroToDataPowerOnDockerLab.
+A very efficient way to read this book while doing the lab is to bring the page up in a browser on the VM you are doing the lab on.
+
 # Prerequisites
 ### Knowledge
 You should have a basic knowledge of how to access and work in the Linux command line terminal. All the commands you will need are provided. You really just need to know that it exists and know how to open it.
 
 ### The lab environment
-It is best to use an environment hosted by IBM as it will be set up specifically with the prerequisites for the lab. You can request one from the author, chase.horvath@ibm.com. It will be accessible via a web browser.  
+It is best to use an environment hosted by IBM as it will be set up specifically with the prerequisites for the lab. You can request one from the author, chase.horvath@ibm.com, or go to https://bluedemos.com/show/3732 to make a request. It will be accessible via a web browser.  
 If you wish to build your own environment, Appendix A: Set up your own VM, is at the end of this lab and has instructions to help you.
 
 ### Accounts you will need (all free)
