@@ -1,0 +1,6 @@
+podman run -it --name name -v /home/cbarnwell/IntroToDataPowerOnDockerLab/dptestz/config:/drouter/config:z -v /home/cbarnwell/IntroToDataPowerOnDockerLab/dptestz/local:/drouter/local:z -v /home/cbarnwell/IntroToDataPowerOnDockerLab/dptestz/certs:/secure/usrcerts:z -e DATAPOWER_ACCEPT_LICENSE="true" -e DATAPOWER_INTERACTIVE="true" -p 9090:9090  --user 1000 ibmcom/datapower:2018.4.1
+
+notes
+Z option - labels it private unshared label
+z option As a result, Podman labels the content with a shared content label. Shared volume labels allow all containers to read/write content.
+had to change original from /opt/ folder to without
